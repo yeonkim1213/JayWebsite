@@ -1,17 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Github,
-  Linkedin,
-  Mail,
-  ExternalLink,
-  Code2,
-  Briefcase,
-  User,
-  ChevronDown,
-  GraduationCap,
-  BookText
-} from 'lucide-react';
+import React from 'react';
 import './App.css';
+import { 
+  Github, 
+  Linkedin, 
+  Mail, 
+  ExternalLink, 
+  Code2, 
+  Briefcase, 
+  User, 
+  BookText 
+} from 'lucide-react';
+
+const skills = {
+  languages: [
+    "Java", "Python", "JavaScript", "TypeScript", "C++", "SQL", "HTML", "CSS", "Ruby"
+  ],
+  frameworks: [
+    "React", "Node.js", "Express", "Spring Boot", "Django", "Next.js", "Vue.js", "Ruby on Rails"
+  ],
+  tools: [
+    "Git", "Docker", "AWS", "MongoDB", "PostgreSQL", "Redis", "Kubernetes", "Jenkins"
+  ]
+};
 
 const courses = {
   computerScience: [
@@ -55,18 +65,14 @@ const publications = [
         venue: "CHI'25",
         authors: "Tamanna Motahar, *Yeon Jae Kim, *Eden Fisher, Jason Wiese",
         title: "Understanding the Training Experiences of Competitive Skiers with Tetraplegia",
-        conference:
-          "In Proceedings of the ACM Conference on CHI Conference on Human Factors in Computing Systems (CHI)",
+        conference: "In Proceedings of the ACM Conference on CHI Conference on Human Factors in Computing Systems (CHI)",
         details: "23 Pages (Revise and resubmit)"
       },
       {
         venue: "ASSETS'24",
-        authors:
-          "Tamanna Motahar, Sara Nurollahian, YeonJae Kim, Marina Kogan, and Jason Wiese",
-        title:
-          "Exploring how People with Spinal Cord Injuries Seek Support on Social Media",
-        conference:
-          "In The 26th International ACM SIGACCESS Conference on Computers and Accessibility",
+        authors: "Tamanna Motahar, Sara Nurollahian, YeonJae Kim, Marina Kogan, and Jason Wiese",
+        title: "Exploring how People with Spinal Cord Injuries Seek Support on Social Media",
+        conference: "In The 26th International ACM SIGACCESS Conference on Computers and Accessibility",
         details: "pp. 1-17. 2024. (Acceptance Rate 29%)"
       }
     ]
@@ -76,10 +82,8 @@ const publications = [
     papers: [
       {
         venue: "IMWUT'25",
-        authors:
-          "Tamanna Motahar, Brandon Rivera-Melo, Ross Imburgia, *Yeon Jae Kim, James Gardner, Jeffrey Rosen-bluth, Jason Wiese",
-        title:
-          "Design and Evaluation of a Power Wheelchair-Based Self-tracking System to Prevent Pressure Ulcers",
+        authors: "Tamanna Motahar, Brandon Rivera-Melo, Ross Imburgia, *Yeon Jae Kim, James Gardner, Jeffrey Rosen-bluth, Jason Wiese",
+        title: "Design and Evaluation of a Power Wheelchair-Based Self-tracking System to Prevent Pressure Ulcers",
         details: "25 pages (Accepted)"
       }
     ]
@@ -89,151 +93,53 @@ const publications = [
 const projects = [
   {
     title: "TiltTracker",
-    description:
-      "A power wheelchair-based self-tracking system designed to prevent pressure ulcers. Built with React Native and Node.js.",
+    description: "A power wheelchair-based self-tracking system designed to prevent pressure ulcers. Built with React Native and Node.js.",
     tags: ["React Native", "Node.js", "MongoDB", "IoT"],
-    image:
-      "https://images.unsplash.com/photo-1551721434-8b94ddff0e6d?auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1551721434-8b94ddff0e6d?auto=format&fit=crop&q=80",
     github: "https://github.com",
     demo: "https://demo.com"
   },
   {
     title: "Social Media Analysis Platform",
-    description:
-      "Platform analyzing support-seeking patterns in Reddit posts from spinal cord injury patients using NLP and machine learning.",
+    description: "Platform analyzing support-seeking patterns in Reddit posts from spinal cord injury patients using NLP and machine learning.",
     tags: ["Python", "NLP", "Machine Learning", "React"],
-    image:
-      "https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&q=80",
     github: "https://github.com",
     demo: "https://demo.com"
   },
   {
     title: "Portfolio Website",
-    description:
-      "Personal portfolio website built with React, TypeScript, and Tailwind CSS showcasing projects and publications.",
+    description: "Personal portfolio website built with React, TypeScript, and Tailwind CSS showcasing projects and publications.",
     tags: ["React", "TypeScript", "Tailwind CSS"],
-    image:
-      "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80",
-    github: "https://github.com",
-    demo: "https://demo.com"
-  },
-  {
-    title: "E-commerce Platform",
-    description:
-      "Full-stack e-commerce platform with real-time inventory management and secure payment processing.",
-    tags: ["Next.js", "Stripe", "PostgreSQL", "Redis"],
-    image:
-      "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&q=80",
-    github: "https://github.com",
-    demo: "https://demo.com"
-  },
-  {
-    title: "AI Image Generator",
-    description:
-      "Web application that generates unique images using stable diffusion models and allows for style customization.",
-    tags: ["Python", "PyTorch", "FastAPI", "React"],
-    image:
-      "https://images.unsplash.com/photo-1547954575-855750c57bd3?auto=format&fit=crop&q=80",
-    github: "https://github.com",
-    demo: "https://demo.com"
-  },
-  {
-    title: "Real-time Chat Application",
-    description:
-      "Scalable chat application with features like real-time messaging, file sharing, and end-to-end encryption.",
-    tags: ["Socket.io", "Express", "MongoDB", "React"],
-    image:
-      "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80",
     github: "https://github.com",
     demo: "https://demo.com"
   }
 ];
 
-const skills = {
-  languages: [
-    "Java",
-    "Python",
-    "JavaScript",
-    "TypeScript",
-    "C++",
-    "SQL"
-  ],
-  frameworks: ["React", "Node.js", "Express", "Spring Boot", "Django"],
-  tools: ["Git", "Docker", "AWS", "MongoDB", "PostgreSQL"],
-  concepts: [
-    "OOP",
-    "Design Patterns",
-    "RESTful APIs",
-    "Microservices",
-    "CI/CD"
-  ]
-};
-
 function App() {
-  const [activeSection, setActiveSection] = useState<string>('');
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setActiveSection(sectionId);
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = [
-        'about',
-        'experience',
-        'projects',
-        'coursework',
-        'publications',
-        'contact'
-      ];
-      const scrollPosition = window.scrollY + 100;
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (
-            scrollPosition >= offsetTop &&
-            scrollPosition < offsetTop + offsetHeight
-          ) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
-    <div className="app-container">
+    <div className="container">
       {/* Navigation */}
-      <nav className="nav-bar">
-        <div className="container-6xl nav-container">
-          <div className="nav-logo">
-            <span>Jay Kim</span>
-          </div>
+      <nav className="nav">
+        <div className="nav-inner">
+          <div className="logo">Jay Kim</div>
           <div className="nav-links">
             {[
               { name: 'About', id: 'about' },
               { name: 'Experience', id: 'experience' },
               { name: 'Projects', id: 'projects' },
-              { name: 'Coursework', id: 'coursework' },
               { name: 'Publications', id: 'publications' },
               { name: 'Contact', id: 'contact' }
             ].map(item => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`nav-link ${
-                  activeSection === item.id ? 'active' : ''
-                }`}
-              >
+              <button key={item.id} onClick={() => scrollTo(item.id)}>
                 {item.name}
               </button>
             ))}
@@ -241,352 +147,199 @@ function App() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="hero-section">
-        <div className="hero-background">
-          <img
+      {/* Header */}
+      <header className="header">
+        <div className="bg">
+          <div className="overlay"></div>
+          <img 
             src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80"
             alt="Background"
-            className="hero-bg-image"
           />
-          <div className="hero-bg-overlay"></div>
         </div>
-        <div className="container-5xl hero-content">
-          <div className="hero-photo">
-            <img
-              src="YOUR_PHOTO_URL_HERE"
-              alt="Jay Kim"
-              className="hero-image"
-            />
-          </div>
-          <h1 className="hero-title">Jay Kim</h1>
-          <p className="hero-subtitle">Software Developer</p>
-          <p className="hero-description">
-            I am a Computer Science graduate specializing in software
-            development, with expertise in full-stack development and data
-            analysis. I have a proven track record of creating user-centered and
-            impactful applications, grounded in a strong foundation of
-            accessibility and research. Passionate about leveraging technology to
-            drive meaningful change, I am eager to pursue full-time software
-            development opportunities.
-          </p>
-          <div className="hero-social">
-            <a href="https://github.com" className="social-link">
-              <Github size={24} />
-            </a>
-            <a href="https://linkedin.com" className="social-link">
-              <Linkedin size={24} />
-            </a>
-            <a href="mailto:contact@example.com" className="social-link">
-              <Mail size={24} />
-            </a>
-          </div>
-          <ChevronDown className="hero-chevron" />
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section className="section about-section" id="about">
-        <div className="container-5xl">
-          <div className="section-heading">
-            <User className="section-icon" />
-            <h2>About</h2>
-          </div>
-          <div className="section-text">
-            <p>
-              I am a Computer Science graduate specializing in software
-              development, with expertise in full-stack development and data
-              analysis. I have a proven track record of creating user-centered
-              and impactful applications, grounded in a strong foundation of
-              accessibility and research.
-            </p>
-          </div>
-          <div className="skills-code">
-            <pre>
-              <code>{`public class Skills {
-  // Programming Languages
-  private String[] languages = {${skills.languages
-    .map(lang => `"${lang}"`)
-    .join(', ')}};
-  // Frameworks & Libraries
-  private String[] frameworks = {${skills.frameworks
-    .map(framework => `"${framework}"`)
-    .join(', ')}};
-  // Development Tools
-  private String[] tools = {${skills.tools
-    .map(tool => `"${tool}"`)
-    .join(', ')}};
-  // Core Concepts
-  private String[] concepts = {${skills.concepts
-    .map(concept => `"${concept}"`)
-    .join(', ')}};
-}`}</code>
-            </pre>
-          </div>
-        </div>
-      </section>
-
-      {/* Experience Section */}
-      <section className="section experience-section" id="experience">
-        <div className="container-5xl">
-          <div className="section-heading">
-            <Briefcase className="section-icon" />
-            <h2>Experience & Education</h2>
-          </div>
-          <div className="resume-button-container">
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="resume-button"
-            >
-              <ExternalLink className="button-icon" />
-              View Resume
-            </a>
-          </div>
-          <div className="timeline">
-            {/* Example Timeline Item – repeat and adjust for each item */}
-            <div className="timeline-item">
-              <div className="timeline-marker"></div>
-              <div className="timeline-content left">
-                <div className="timeline-card education-card">
-                  <h3>B.S. in Computer Science</h3>
-                  <p className="institution">University of Utah</p>
-                  <p className="duration">Expected Graduation: May 2024</p>
-                  <ul className="details">
-                    <li>GPA: 3.8/4.0</li>
-                    <li>Dean's List: Fall 2020 - Present</li>
-                    <li>
-                      Relevant Coursework: Algorithms, Data Structures,
-                      Software Engineering, Database Systems
-                    </li>
-                  </ul>
-                </div>
+        <div className="header-content">
+          <div className="profile">
+            {/* Left: Profile Info */}
+            <div className="left">
+              <img 
+                src="YOUR_PHOTO_URL_HERE" 
+                alt="Jay Kim" 
+                className="profile-img"
+              />
+              <h1>Jay Kim</h1>
+              <p className="role">Software Developer</p>
+              <p className="desc">
+                I am a Computer Science graduate specializing in software development with expertise in full-stack development and data analysis.
+              </p>
+              <div className="social">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                  <Github />
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                  <Linkedin />
+                </a>
+                <a href="mailto:contact@example.com">
+                  <Mail />
+                </a>
               </div>
             </div>
-            {/* Add additional timeline items as needed */}
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section className="section projects-section" id="projects">
-        <div className="container-6xl">
-          <div className="section-heading">
-            <Code2 className="section-icon" />
-            <h2>Projects</h2>
-          </div>
-          <div className="projects-grid">
-            {projects.map((project, index) => (
-              <div key={index} className="project-card">
-                <div className="project-image-container">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="project-image"
-                  />
-                  <div className="project-image-overlay"></div>
-                </div>
-                <div className="project-content">
-                  <h3 className="project-title">{project.title}</h3>
-                  <p className="project-description">{project.description}</p>
-                  <div className="project-tags">
-                    {project.tags.map((tag, tagIndex) => (
-                      <span key={tagIndex} className="project-tag">
-                        {tag}
-                      </span>
-                    ))}
+            {/* Right: Skills */}
+            <div className="right">
+              <div className="skills">
+                <h2>Skills</h2>
+                <div>
+                  <h4>Languages</h4>
+                  <div className="tags">
+                    {skills.languages.map((lang, i) => <span key={i}>{lang}</span>)}
                   </div>
-                  <div className="project-links">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-link"
-                    >
-                      <Github className="link-icon" />
-                      Code
-                    </a>
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-link"
-                    >
-                      <ExternalLink className="link-icon" />
-                      Demo
-                    </a>
+                </div>
+                <div>
+                  <h4>Frameworks</h4>
+                  <div className="tags">
+                    {skills.frameworks.map((fw, i) => <span key={i}>{fw}</span>)}
+                  </div>
+                </div>
+                <div>
+                  <h4>Tools</h4>
+                  <div className="tags">
+                    {skills.tools.map((tool, i) => <span key={i}>{tool}</span>)}
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Coursework Section */}
-      <section className="section coursework-section" id="coursework">
-        <div className="container-5xl">
-          <div className="section-heading">
-            <GraduationCap className="section-icon" />
-            <h2>Coursework</h2>
-          </div>
-          <div className="coursework-grid">
-            <div className="coursework-category">
-              <h3>Computer Science</h3>
-              <ul>
-                {courses.computerScience.map((course, index) => (
-                  <li key={index}>{course}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="coursework-category">
-              <h3>Computer Science Electives</h3>
-              <ul>
-                {courses.computerScienceElectives.map((course, index) => (
-                  <li key={index}>{course}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="coursework-category">
-              <h3>Mathematics</h3>
-              <ul>
-                {courses.mathematics.map((course, index) => (
-                  <li key={index}>{course}</li>
-                ))}
-              </ul>
             </div>
           </div>
         </div>
-      </section>
+      </header>
 
-      {/* Publications Section */}
-      <section className="section publications-section" id="publications">
-        <div className="container-5xl">
-          <div className="section-heading">
-            <BookText className="section-icon" />
-            <h2>Publications</h2>
-          </div>
-          <div className="publications-list">
-            {publications.map((pubSection, index) => (
-              <div key={index} className="publication-section">
-                <h3>{pubSection.type}</h3>
-                <div className="publication-cards">
-                  {pubSection.papers.map((paper, paperIndex) => (
-                    <div key={paperIndex} className="publication-card">
-                      <p className="publication-venue">{paper.venue}</p>
-                      <h4 className="publication-title">{paper.title}</h4>
-                      <p className="publication-authors">{paper.authors}</p>
-                      {paper.conference && (
-                        <p className="publication-conference">
-                          {paper.conference}
-                        </p>
-                      )}
-                      <p className="publication-details">{paper.details}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+      {/* About */}
+      <section id="about" className="about">
+        <div className="sec-head">
+          <User className="icon" />
+          <h2>About</h2>
         </div>
-      </section>
-
-      {/* Contact Section */}
-      <section className="section contact-section" id="contact">
-        <div className="contact-background">
-          <svg
-            className="bg-svg top-svg"
-            width="400"
-            height="400"
-            fill="none"
-            viewBox="0 0 400 400"
-          >
-            <circle
-              cx="200"
-              cy="200"
-              r="200"
-              fill="rgba(255,255,255,0.05)"
-            />
-          </svg>
-          <svg
-            className="bg-svg bottom-svg"
-            width="400"
-            height="400"
-            fill="none"
-            viewBox="0 0 400 400"
-          >
-            <circle
-              cx="200"
-              cy="200"
-              r="200"
-              fill="rgba(255,255,255,0.05)"
-            />
-          </svg>
-        </div>
-        <div className="container-3xl contact-content">
-          <h2>Get in Touch</h2>
+        <div className="sec-body">
           <p>
-            I'm currently looking for new opportunities. If you have any
-            questions or just want to say hi, feel free to drop me a message.
+            I am a Computer Science graduate with a focus on building user-centered applications and exploring new technologies.
           </p>
-          <form
-            action="mailto:contact@example.com"
-            method="POST"
-            className="contact-form"
-          >
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                className="input-field"
-                placeholder="Your Name"
-                required
-              />
+        </div>
+      </section>
+
+      {/* Experience */}
+      <section id="experience" className="experience">
+        <div className="sec-head">
+          <Briefcase className="icon" />
+          <h2>Experience</h2>
+        </div>
+        <div className="resume">
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+            <ExternalLink className="icon" /> View Resume
+          </a>
+        </div>
+        <div className="timeline">
+          <div className="item left">
+            <div className="item-body">
+              <h3>B.S. in Computer Science</h3>
+              <p className="sub">University of Utah</p>
+              <p className="date">May 2024</p>
+              <ul>
+                <li>GPA: 3.8/4.0</li>
+                <li>Dean's List</li>
+              </ul>
             </div>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="input-field"
-                placeholder="you@example.com"
-                required
-              />
+          </div>
+          <div className="item right">
+            <div className="item-body">
+              <h3>Teaching Assistant</h3>
+              <p className="sub">Utah College of Engineering</p>
+              <p className="date">Aug - Dec 2024</p>
+              <ul>
+                <li>Graded assignments</li>
+                <li>Assisted in class</li>
+              </ul>
             </div>
-            <div className="form-group">
-              <label htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                rows={4}
-                className="textarea-field"
-                placeholder="Your message"
-                required
-              ></textarea>
+          </div>
+          <div className="clear"></div>
+        </div>
+      </section>
+
+      {/* Projects */}
+      <section id="projects" className="projects">
+        <div className="sec-head">
+          <Code2 className="icon" />
+          <h2>Projects</h2>
+        </div>
+        <div className="grid">
+          {projects.map((proj, i) => (
+            <div key={i} className="card">
+              <img src={proj.image} alt={proj.title} className="card-img" />
+              <div className="card-body">
+                <h3>{proj.title}</h3>
+                <p>{proj.description}</p>
+                <div className="tags">
+                  {proj.tags.map((tag, j) => <span key={j}>{tag}</span>)}
+                </div>
+                <div className="links">
+                  <a href={proj.github} target="_blank" rel="noopener noreferrer">
+                    <Github className="icon" /> Code
+                  </a>
+                  <a href={proj.demo} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="icon" /> Demo
+                  </a>
+                </div>
+              </div>
             </div>
-            <div className="form-group">
-              <button type="submit" className="button-field">
-                Send Message
-              </button>
+          ))}
+        </div>
+      </section>
+
+      {/* Publications */}
+      <section id="publications" className="publications">
+        <div className="sec-head">
+          <BookText className="icon" />
+          <h2>Publications</h2>
+        </div>
+        <div className="pub-body">
+          {publications.map((pub, i) => (
+            <div key={i}>
+              <h3>{pub.type}</h3>
+              {pub.papers.map((paper, j) => (
+                <div key={j} className="pub-card">
+                  <p className="venue">{paper.venue}</p>
+                  <h4>{paper.title}</h4>
+                  <p className="authors">{paper.authors}</p>
+                  {paper.conference && <p className="conf">{paper.conference}</p>}
+                  <p className="details">{paper.details}</p>
+                </div>
+              ))}
             </div>
-          </form>
-          <div className="contact-social">
-            <a href="mailto:contact@example.com" className="social-link">
-              <Mail size={24} />
+          ))}
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="contact">
+        <div className="sec-head">
+          <h2>Contact</h2>
+        </div>
+        <div className="sec-body">
+          <p>I'm looking for new opportunities. Feel free to reach out!</p>
+          <div className="btn-group">
+            <a href="mailto:contact@example.com" className="btn email">
+              <Mail className="icon" /> Email
             </a>
-            <a href="https://github.com" className="social-link">
-              <Github size={24} />
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="btn linkedin">
+              <Linkedin className="icon" /> LinkedIn
             </a>
-            <a href="https://linkedin.com" className="social-link">
-              <Linkedin size={24} />
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="btn github">
+              <Github className="icon" /> GitHub
             </a>
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="footer">
+        <p>© 2024 Jay Kim. All rights reserved.</p>
+      </footer>
     </div>
   );
 }
